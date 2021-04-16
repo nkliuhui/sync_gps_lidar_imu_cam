@@ -1,0 +1,51 @@
+{
+    "configurations": [
+        {
+            "browse": {
+                "databaseFilename": "",
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "includePath": [
+                "/home/lab118/demo_ws/devel/include/**",
+                "/home/lab118/ros_driver/devel/include/**",
+                "/home/lab118/husky_ws/devel/include/**",
+                "/opt/ros/kinetic/include/**",
+                "/home/lab118/ros_driver/src/srv_tools/bag_tools/include/**",
+                "/home/lab118/demo_ws/src/costmap_lite/include/**",
+                "/home/lab118/demo_ws/src/demo/include/**",
+                "/home/lab118/demo_ws/src/gps_driver/include/**",
+                "/home/lab118/husky_ws/src/husky-kinetic-devel/husky_base/include/**",
+                "/home/lab118/ros_driver/src/iai_kinect2/kinect2_bridge/include/**",
+                "/home/lab118/ros_driver/src/iai_kinect2/kinect2_calibration/include/**",
+                "/home/lab118/ros_driver/src/iai_kinect2/kinect2_registration/include/**",
+                "/home/lab118/demo_ws/src/LeGO-LOAM-master/LeGO-LOAM/include/**",
+                "/home/lab118/ros_driver/src/libvisensor/include/**",
+                "/home/lab118/demo_ws/src/LIO-SAM-master/include/**",
+                "/home/lab118/demo_ws/src/nk_nav_msg/include/**",
+                "/home/lab118/demo_ws/src/outdoor/include/**",
+                "/home/lab118/ros_driver/src/pointgrey_camera_driver/pointgrey_camera_driver/include/**",
+                "/home/lab118/demo_ws/src/ps4_bag/include/**",
+                "/home/lab118/ros_driver/src/realsense-ros-development/realsense2_camera/include/**",
+                "/home/lab118/demo_ws/src/ros_h264_streamer/include/**",
+                "/home/lab118/demo_ws/src/rqt_nav_plugin/include/**",
+                "/home/lab118/demo_ws/src/sbpl_path_planner/include/**",
+                "/home/lab118/demo_ws/src/search_visualization/include/**",
+                "/home/lab118/demo_ws/src/tcp_client/include/**",
+                "/home/lab118/ros_driver/src/usb_cam/include/**",
+                "/home/lab118/ros_driver/src/velodyne-master/velodyne_driver/include/**",
+                "/home/lab118/husky_ws/src/velodyne_simulator/velodyne_gazebo_plugins/include/**",
+                "/home/lab118/ros_driver/src/velodyne-master/velodyne_laserscan/include/**",
+                "/home/lab118/ros_driver/src/velodyne-master/velodyne_pcl/include/**",
+                "/home/lab118/ros_driver/src/velodyne-master/velodyne_pointcloud/include/**",
+                "/home/lab118/ros_driver/src/visensor_node-master/include/**",
+                "/usr/include/**"
+            ],
+            "name": "ROS",
+            "intelliSenseMode": "gcc-x64",
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c11",
+            "cppStandard": "c++17"
+        }
+    ],
+    "version": 4
+}

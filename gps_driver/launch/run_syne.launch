@@ -1,0 +1,13 @@
+<launch>
+
+	<!-- 串口信息 -->
+	<param name="/gps/syne_SerialPort" value="/dev/ttyUSB0" />
+	<param name="/gps/syne_BaudRate" value="115200" />
+
+	<!-- gps驱动节点 -->
+	<node pkg="gps_driver" type="system_syne_node" name="system_syne_node" output="screen">
+  	</node>
+
+</launch>
+
+

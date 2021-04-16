@@ -1,0 +1,27 @@
+This is a ROS driver for Xsens MTi-10 and MTi-100 series motion trackers. Xsens has changed the message type for its 4th generation sensors. Drivers using the old message type are not compatible with the MTi-10 and MTi-100 series. To use this driver, a license number is required for the MT Software Suite. Setting up the sensor also becomes more complicated. 
+
+Wiki page: http://wiki.ros.org/receive_xsens
+
+How to use:
+
+  1) Download the MT Software Suite (any version) and install it on a Windows machine (you may skip this step and use default sensor configuration), then download the MT SDK for Linux 4.2.1 and install it on a Linux machine (this should be the machine that ROS is installed on).
+
+Here is the software website: http://www.xsens.com/en/mt-software-suite
+
+  2) Follow the instructions in the MT SDK for Linux 4.2.1 to install the software and make sure the examples run correctly with the sensor. Here is a summary of the installation procedure.
+
+    (a) Unpack the MT SDK.
+    (b) Go to /shared_object folder, put the license number in the “serialkey.h” file, then “make” and “sudo make system_install”.
+    (c) Connect the sensor to the Linux machine and run one of the examples in /shared_object folder.
+
+  (3) Connect the sensor to the Windows machine and open the MT Manager. Click the button on top of the screen for “output configuration options”, make sure “Turn Rate” and “Acceleration” are checked. You can also change frequency on the same page. If you skip this step, the sensor is configured to give orientation only by default.
+
+  (4) Clone this driver from github to a ROS workspace. Go to the cloned folder and find the “src/serialkey.h” file, put your license number in it and use “catkin_make” to build it.
+  
+  (5) Roslaunch the “receive_xsens.launch” file in /launch folder. The driver will publish sensor_msgs/Imu typed messages named /imu/data.
+
+Additional notes:
+
+* Your account might require permissions to communicate with the sensor. To do this, add the username to the dialout group by “sudo adduser username dialout” and reboot the computer.
+
+* The current driver does not publish data from GPS. If used with MTi-G-700, minor code change may be needed. Users can change /src/main.cpp file between lines 176-210. Also, if magnetic field data is needed, users can uncommand lines 213-215 and add a corresponding ROS message publisher under line 110. Majority of the code is taken from Xsens Linux examples and is self explanatory. Please remember to configure the sensor to return data that you need using the MT Manager on a Windows machine.

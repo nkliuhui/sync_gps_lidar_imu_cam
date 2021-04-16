@@ -1,0 +1,5 @@
+<launch>
+	<param name="/imu/sync_SerialPort" value="/dev/ttyUSB1" />
+	<param name="/imu/sync_BaudRate" value="9600" />
+	<node pkg="xsens_imu_driver" type="xsens_imu_driver" name="xsens_imu_driver" output="screen" />
+</launch>

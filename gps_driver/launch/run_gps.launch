@@ -1,0 +1,21 @@
+<launch>
+
+	<!-- gps与电脑(网络时间)的固定延时(gps快, unit: sec) -->
+	<param name="/gps/time_delay" value="-18.0" />
+	<!-- 串口信息 -->
+	<param name="/gps/SerialPort" value="/dev/ttyUSB0" />
+	<param name="/gps/BaudRate" value="230400" />
+	<!-- 参考坐标系设定 -->
+	<param name="/gps/frame_id" value="/gps_imu_baselink" />
+	<!-- can口, 其中速率设置成固定值500KBit/s -->
+	<param name="/gps/pcan_dev" value="pcanusb32" />
+
+	<!-- gps驱动节点 -->
+	<node pkg="gps_driver" type="ground_truth_node" name="gpsResolving_node" output="screen">
+  	</node>
+	<node pkg="gps_driver" type="can_rawIMU_node" name="canResolveNode" output="screen" >
+	</node>
+
+</launch>
+
+
