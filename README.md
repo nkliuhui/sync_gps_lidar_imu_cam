@@ -27,3 +27,9 @@
 1. GPS同步IMU: https://github.com/ZhuangYanDLUT/hard_sync_dut.git.
 2. IMU触发相机: (驱动修改)https://github.com/TurtleZhong/Visual-Inertial-Synchronization-Hardware/blob/670409690b592d364e6c179a74981bfcdd920ced/pointgrey_camera_driver/pointgrey_camera_driver/src/nodelet.cpp
 3. 串口程序: 调用ROS的serial实现.
+
+## TODO List:
+* 优化GPS数据读取程序
+* 无GPS设备时, 使用MCU模拟产生伪信号
+* 添加统一启动的launch文件及相应数据录制命令
+* 固定USB端口的串口号
