@@ -367,6 +367,7 @@ private:
       camera_time_.push(*camera_time_stamp);
       camera_time_ready = true;
       ROS_INFO_STREAM("Camera time stamp: " << camera_time_stamp->header.stamp);
+      // printf("%.6f\n", camera_time_stamp->header.stamp.toSec());
   }
 
   boost::shared_ptr<dynamic_reconfigure::Server<pointgrey_camera_driver::PointGreyConfig> > srv_; ///< Needed to initialize and keep the dynamic_reconfigure::Server in scope.

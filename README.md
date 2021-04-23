@@ -34,3 +34,10 @@
 * 添加统一启动的launch文件及相应数据录制命令
 * 固定USB端口的串口号
 * GPS接收设备时钟的时间跳变问题: GPS与IMU时钟跳变最明显
+
+## 修改记录
+* 相机驱动中接收IMU触发信号时间的buffer修改为1, 处于严谨考虑, 每次取出触发信号时间队列最新元素后将队列清空---主要原因在于ROS的非实时性;
+```
+* camera_time_sub_ = nh.subscribe("/imu/trigger_time", 1, &pointgrey_camera_driver::PointGreyCameraNodelet::cameraTimeCallback, this);
+* while(!camera_time_.empty()) camera_time_.pop();
+```

@@ -50,6 +50,9 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 #include <dynamic_reconfigure/server.h> // Needed for the dynamic_reconfigure gui service to run
 
 #include <fstream>
+#include <sensor_msgs/TimeReference.h>
+#include <iostream>
+#include <queue>
 
 namespace pointgrey_camera_driver
 {
@@ -287,6 +290,9 @@ private:
     image_transport::SubscriberStatusCallback cb = boost::bind(&PointGreyCameraNodelet::connectCb, this);
     it_pub_ = it_->advertiseCamera("image_raw", 5, cb, cb);
 
+    camera_time_sub_ = nh.subscribe("/imu/trigger_time", 1, &pointgrey_camera_driver::PointGreyCameraNodelet::cameraTimeCallback, this);
+    camera_time_ready = false;
+
     // Set up diagnostics
     updater_.setHardwareID("pointgrey_camera " + cinfo_name.str());
 
@@ -491,8 +497,25 @@ private:
             wfov_image->temperature = pg_.getCameraTemperature();
 
             ros::Time time = ros::Time::now();
-            wfov_image->header.stamp = time;
-            wfov_image->image.header.stamp = time;
+            //Try to use the trigger
+            sensor_msgs::TimeReference camera_time;
+            while (camera_time_.empty())
+            {
+                ros::Duration(0.001).sleep();
+    //            ROS_INFO_STREAM("***Wait for the trigger***");
+            }
+
+            camera_time = camera_time_.back();
+            ROS_INFO_STREAM("Camera time stamp ready? " << camera_time_ready << std::endl << "camera_time_.size() = " << camera_time_.size());
+            while(!camera_time_.empty())
+              camera_time_.pop();
+
+            camera_time_ready = false;
+
+            // wfov_image->header.stamp = time;
+            // wfov_image->image.header.stamp = time;
+            wfov_image->header.stamp = camera_time.header.stamp;
+            wfov_image->image.header.stamp = camera_time.header.stamp;
 
             // Set the CameraInfo message
             ci_.reset(new sensor_msgs::CameraInfo(cinfo_->getCameraInfo()));
@@ -543,6 +566,15 @@ private:
       updater_.update();
     }
     NODELET_DEBUG("Leaving thread.");
+  }
+
+  void cameraTimeCallback(const sensor_msgs::TimeReference::ConstPtr &camera_time_stamp)
+  {
+      // put the data to queue
+      camera_time_.push(*camera_time_stamp);
+      camera_time_ready = true;
+      ROS_INFO_STREAM("Camera time stamp: " << camera_time_stamp->header.stamp);
+      // printf("%.6f\n", camera_time_stamp->header.stamp.toSec());
   }
 
   void gainWBCallback(const image_exposure_msgs::ExposureSequence &msg)
@@ -603,6 +635,11 @@ private:
 
   /// Configuration:
   pointgrey_camera_driver::PointGreyConfig config_;
+
+  //Trigger
+  std::queue<sensor_msgs::TimeReference> camera_time_;
+  bool camera_time_ready;
+  ros::Subscriber camera_time_sub_; ///
 };
 
 PLUGINLIB_EXPORT_CLASS(pointgrey_camera_driver::PointGreyCameraNodelet, nodelet::Nodelet)  // Needed for Nodelet declaration
