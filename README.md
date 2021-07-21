@@ -29,11 +29,16 @@
 3. 串口程序: 调用ROS的serial实现.
 
 ## TODO List:
-* 优化GPS数据读取程序
-* 无GPS设备时, 使用MCU模拟产生伪信号
-* 添加统一启动的launch文件及相应数据录制命令
-* 固定USB端口的串口号
-* GPS接收设备时钟的时间跳变问题: GPS与IMU时钟跳变最明显
+* 优化GPS数据读取程序(目前满足要求)  
+* ~~无GPS设备时, 使用MCU模拟产生伪信号~~(替代方案可以使用多余的IMU, 如XSENS mti和dji-A3等可知道触发信号时间的)  
+* ~~添加统一启动的launch文件及相应数据录制命令(done)~~  
+* 固定USB端口的串口号(imu数据串口端口号已固定, imu接收NMEA的串口与GPS的串口未固定)  
+* **~~GPS接收设备时钟的时间跳变问题: GPS与IMU时钟跳变最明显~~(问题出自mti-300的驱动中clockBias线设置有误, 未添加外部时钟源的频率/周期<倒数第二个参数, unit: ms>)**  
+    ```
+    psysettings[2] = XsSyncSetting(XSL_ClockIn, XSF_ClockBiasEstimation, XSP_RisingEdge, 0, 0, 0, 0, 1000, 0);  //XSL_ExtTimepulseIn
+    * 判断依据为当配置正确时, 接收到的触发时间中低于‘秒’的部分被固定
+    * 当之前错误设置(设置的0), 将每两分钟跳变5ms(正向跳变, 即mti的时间戳突然增加5ms) 
+    ```
 
 ## 修改记录
 * 相机驱动中接收IMU触发信号时间的buffer修改为1, 处于严谨考虑, 每次取出触发信号时间队列最新元素后将队列清空---主要原因在于ROS的非实时性;
@@ -41,3 +46,4 @@
 * camera_time_sub_ = nh.subscribe("/imu/trigger_time", 1, &pointgrey_camera_driver::PointGreyCameraNodelet::cameraTimeCallback, this);
 * while(!camera_time_.empty()) camera_time_.pop();
 ```
+* XSENS Mti-300驱动参数修改, 详见TODO List.

@@ -303,7 +303,7 @@ int main(int argc, char** argv)
 #ifdef ENABLE_IMU_SYNC_MODE
 	ros::Publisher pub_synout = nh.advertise<std_msgs::Header> ("/imu/synout_msg", 5);
 	ros::Publisher pub_synin = nh.advertise<xsens_imu_driver::synin> ("/imu/synin_msg", 5);
-	ros::Publisher pub_sync_out = nh.advertise<sensor_msgs::TimeReference>("/imu/trigger_time", 10);
+	ros::Publisher pub_sync_out = nh.advertise<sensor_msgs::TimeReference>("/imu/trigger_time", 1);
 #endif
 
 	
@@ -384,7 +384,7 @@ int main(int argc, char** argv)
 			//XsSyncLine line, XsSyncFunction function, XsSyncPolarity polarity, pulseWidth, offset, skipFirst, skipFactor, clockPeriod, triggerOnce
 			psysettings[0] = XsSyncSetting(XSL_Bi1Out, XSF_IntervalTransitionMeasurement , XSP_RisingEdge, 500, 0, 30, 15, 0, 0);
 			psysettings[1] = XsSyncSetting(XSL_In1, XSF_TriggerIndication, XSP_RisingEdge, 0, 0, 0, 0, 0, 0);  //XSL_Bi1In
-			psysettings[2] = XsSyncSetting(XSL_ClockIn, XSF_ClockBiasEstimation, XSP_RisingEdge, 0, 0, 0, 0, 0, 0);  //XSL_ExtTimepulseIn
+			psysettings[2] = XsSyncSetting(XSL_ClockIn, XSF_ClockBiasEstimation, XSP_RisingEdge, 0, 0, 0, 0, 1000, 0);  //XSL_ExtTimepulseIn
 			
 			XsSyncSettingArray settingList(3, psysettings);
 			if(!device->setSyncSettings(settingList))

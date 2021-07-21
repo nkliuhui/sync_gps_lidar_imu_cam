@@ -5809,24 +5809,24 @@
 			</g>
 			<g id="shape22-100" v:mID="22" v:groupContext="shape" transform="translate(75.2913,-62.479)">
 				<title>工作表.22</title>
-				<desc>IMU 400Hz</desc>
+				<desc>IMU 200Hz</desc>
 				<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 				<v:textRect cx="18.078" cy="184.835" width="36.16" height="20"/>
 				<rect x="0" y="174.835" width="36.1559" height="20" class="st1"/>
 				<text x="9.33" y="182.14" class="st3" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>IMU<v:newlineChar/><tspan
-							x="6.08" dy="1.2em" class="st5">400</tspan>Hz</text>			</g>
+							x="6.08" dy="1.2em" class="st5">200</tspan>Hz</text>			</g>
 			<g id="shape24-104" v:mID="24" v:groupContext="shape" transform="translate(71.6063,-17.2034)">
 				<title>工作表.24</title>
 				<path d="M0 194.84 L44.61 194.84" class="st21"/>
 			</g>
 			<g id="shape25-109" v:mID="25" v:groupContext="shape" transform="translate(77.7197,-7.20345)">
 				<title>工作表.25</title>
-				<desc>图像 25Hz</desc>
+				<desc>图像 20Hz</desc>
 				<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 				<v:textRect cx="18.078" cy="184.835" width="36.16" height="20"/>
 				<rect x="0" y="174.835" width="36.1559" height="20" class="st1"/>
 				<text x="9.08" y="182.14" class="st23" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>图像<v:newlineChar/><tspan
-							x="8.33" dy="1.2em" class="st24">25</tspan><tspan class="st24">Hz</tspan></text>			</g>
+							x="8.33" dy="1.2em" class="st24">20</tspan><tspan class="st24">Hz</tspan></text>			</g>
 		</g>
 	</g>
 </svg>
